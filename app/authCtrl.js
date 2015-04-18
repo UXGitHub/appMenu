@@ -12,8 +12,9 @@ app.controller('authCtrl', function ($scope, $rootScope, $routeParams, $location
             }
         });
     };
-    $scope.signup = {email:'',password:'',name:'',phone:'',address:''};
+    $scope.signup = {cnpj:'',nameBusiness:'',name:'',email:'',password:'',password2:''};
     $scope.signUp = function (customer) {
+        
         Data.post('signUp', {
             customer: customer
         }).then(function (results) {

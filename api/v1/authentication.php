@@ -2,7 +2,8 @@
 $app->get('/session', function() {
     $db = new DbHandler();
     $session = $db->getSession();
-    $response["uid"] = $session['uid'];
+    // var_dump($session); die;
+    $response["userid"] = $session['userid'];
     $response["email"] = $session['email'];
     $response["name"] = $session['name'];
     echoResponse(200, $session);
@@ -16,21 +17,20 @@ $app->post('/login', function() use ($app) {
     $db = new DbHandler();
     $password = $r->customer->password;
     $email = $r->customer->email;
-    $user = $db->getOneRecord("select uid,name,password,email,created from customers_auth where phone='$email' or email='$email'");
+    $user = $db->getOneRecord("select idusuario, nome, senha, email from usuario where email='$email'");
     if ($user != NULL) {
-        if(passwordHash::check_password($user['password'],$password)){
+        if(passwordHash::check_password($user['senha'],$password)){
         $response['status'] = "success";
         $response['message'] = 'Logged in successfully.';
-        $response['name'] = $user['name'];
-        $response['uid'] = $user['uid'];
+        $response['name'] = $user['nome'];
+        $response['userid'] = $user['idusuario'];
         $response['email'] = $user['email'];
-        $response['createdAt'] = $user['created'];
         if (!isset($_SESSION)) {
             session_start();
         }
-        $_SESSION['uid'] = $user['uid'];
+        $_SESSION['userid'] = $user['idusuario'];
         $_SESSION['email'] = $email;
-        $_SESSION['name'] = $user['name'];
+        $_SESSION['name'] = $user['nome'];
         } else {
             $response['status'] = "error";
             $response['message'] = 'Login failed. Incorrect credentials';
@@ -42,42 +42,75 @@ $app->post('/login', function() use ($app) {
     echoResponse(200, $response);
 });
 $app->post('/signUp', function() use ($app) {
+    
     $response = array();
-    $r = json_decode($app->request->getBody());
-    verifyRequiredParams(array('email', 'name', 'password'),$r->customer);
+
+    $requestParams = json_decode($app->request->getBody());
+
+    $nameBusiness = $requestParams->customer->nameBusiness;
+    $cnpj = $requestParams->customer->cnpj;
+    $name = $requestParams->customer->name;
+    $email = $requestParams->customer->email;
+    $password = $requestParams->customer->password;
+
     require_once 'passwordHash.php';
+
+    $business = array(
+        'nome' => $nameBusiness,
+        'cnpj' => $cnpj,
+        'logradouro' => 'FIXO',
+        'cep' => '11111111',
+        'municipio_idmunicipio' => 1,
+        'estado_idestado' => 1,
+        'pais_idpais' => 1
+    );
+
+    $user = array(
+        'nome' => $name,
+        'email' => $email,
+        'senha' => passwordHash::hash($password),
+        'empresa_idempresa'=> ''
+    );
+
     $db = new DbHandler();
-    $phone = $r->customer->phone;
-    $name = $r->customer->name;
-    $email = $r->customer->email;
-    $address = $r->customer->address;
-    $password = $r->customer->password;
-    $isUserExists = $db->getOneRecord("select 1 from customers_auth where phone='$phone' or email='$email'");
-    if(!$isUserExists){
-        $r->customer->password = passwordHash::hash($password);
-        $tabble_name = "customers_auth";
-        $column_names = array('phone', 'name', 'email', 'password', 'city', 'address');
-        $result = $db->insertIntoTable($r->customer, $column_names, $tabble_name);
-        if ($result != NULL) {
-            $response["status"] = "success";
-            $response["message"] = "User account created successfully";
-            $response["uid"] = $result;
-            if (!isset($_SESSION)) {
-                session_start();
-            }
-            $_SESSION['uid'] = $response["uid"];
-            $_SESSION['phone'] = $phone;
-            $_SESSION['name'] = $name;
-            $_SESSION['email'] = $email;
-            echoResponse(200, $response);
-        } else {
-            $response["status"] = "error";
-            $response["message"] = "Failed to create customer. Please try again";
-            echoResponse(201, $response);
-        }            
-    }else{
+
+    $isUserExists = $db->getOneRecord("select nome from usuario where email='$email'");
+    $isBusinessExists = $db->getOneRecord("select idempresa from empresa where cnpj='$cnpj'");
+
+    if (!$isBusinessExists && !$isUserExists) {
+
+        $tableName = 'empresa';
+        $columnNames = array('nome', 'cnpj', 'logradouro', 'cep', 'municipio_idmunicipio', 'estado_idestado', 'pais_idpais');
+        $insertBusiness = $db->insertIntoTable($business, $columnNames, $tableName);
+
+        $newBusiness = $db->getOneRecord("select idempresa from empresa where cnpj='$cnpj'");
+
+        $user['empresa_idempresa'] = $newBusiness['idempresa'];
+        // var_dump($user); die;
+        $tableName = 'usuario';
+        $columnNames = array('nome', 'email', 'senha', 'empresa_idempresa');
+        $insertUser = $db->insertIntoTable($user, $columnNames, $tableName);
+
+        $response["status"] = "success";
+        $response["message"] = "Cadastro realizado";
+        echoResponse(200, $response);
+
+        // var_dump($insertBusiness); die;
+    } else if ($isUserExists) {
+
         $response["status"] = "error";
-        $response["message"] = "An user with the provided phone or email exists!";
+        $response["message"] = "Responsável já cadastrado.";
+        echoResponse(201, $response);
+
+    } else if ($isBusinessExists) {
+
+        $response["status"] = "error";
+        $response["message"] = "Empresa já cadastrada";
+        echoResponse(201, $response);
+
+    } else {
+        $response["status"] = "error";
+        $response["message"] = "Empresa e responsável já cadastrados";
         echoResponse(201, $response);
     }
 });

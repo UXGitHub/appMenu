@@ -50,15 +50,15 @@ public function getSession(){
         session_start();
     }
     $sess = array();
-    if(isset($_SESSION['uid']))
+    if(isset($_SESSION['userid']))
     {
-        $sess["uid"] = $_SESSION['uid'];
+        $sess["userid"] = $_SESSION['userid'];
         $sess["name"] = $_SESSION['name'];
         $sess["email"] = $_SESSION['email'];
     }
     else
     {
-        $sess["uid"] = '';
+        $sess["userid"] = '';
         $sess["name"] = 'Guest';
         $sess["email"] = '';
     }
@@ -68,9 +68,9 @@ public function destroySession(){
     if (!isset($_SESSION)) {
     session_start();
     }
-    if(isSet($_SESSION['uid']))
+    if(isSet($_SESSION['userid']))
     {
-        unset($_SESSION['uid']);
+        unset($_SESSION['userid']);
         unset($_SESSION['name']);
         unset($_SESSION['email']);
         $info='info';

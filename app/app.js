@@ -37,9 +37,9 @@ app.config(['$routeProvider',
         $rootScope.$on("$routeChangeStart", function (event, next, current) {
             $rootScope.authenticated = false;
             Data.get('session').then(function (results) {
-                if (results.uid) {
+                if (results.userid) {
                     $rootScope.authenticated = true;
-                    $rootScope.uid = results.uid;
+                    $rootScope.userid = results.userid;
                     $rootScope.name = results.name;
                     $rootScope.email = results.email;
                 } else {
