@@ -2,7 +2,7 @@
     <ul class="breadcrumb">
         <li>
             <i class="ace-icon fa fa-home home-icon"></i>
-            <a href="#">Home</a>
+            <a href="#/dashboard">Home</a>
         </li>
         <li class="active">Dashboard</li>
     </ul>
@@ -23,6 +23,7 @@
                         <br/>NAME: {{name}}
                         <br/>E-MAIL: {{email}}
                         <br/>
+                        <a ng-click="openViewChangePassword();">Trocar senha</a> <br>
                         <a ng-click="logout();">Logout</a>
                     </div>
                 </div>

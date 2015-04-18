@@ -2,7 +2,6 @@
 $app->get('/session', function() {
     $db = new DbHandler();
     $session = $db->getSession();
-    // var_dump($session); die;
     $response["userid"] = $session['userid'];
     $response["email"] = $session['email'];
     $response["name"] = $session['name'];
@@ -86,7 +85,6 @@ $app->post('/signUp', function() use ($app) {
         $newBusiness = $db->getOneRecord("select idempresa from empresa where cnpj='$cnpj'");
 
         $user['empresa_idempresa'] = $newBusiness['idempresa'];
-        // var_dump($user); die;
         $tableName = 'usuario';
         $columnNames = array('nome', 'email', 'senha', 'empresa_idempresa');
         $insertUser = $db->insertIntoTable($user, $columnNames, $tableName);
@@ -95,17 +93,16 @@ $app->post('/signUp', function() use ($app) {
         $response["message"] = "Cadastro realizado";
         echoResponse(200, $response);
 
-        // var_dump($insertBusiness); die;
-    } else if ($isUserExists) {
-
-        $response["status"] = "error";
-        $response["message"] = "Responsável já cadastrado.";
-        echoResponse(201, $response);
-
     } else if ($isBusinessExists) {
 
         $response["status"] = "error";
         $response["message"] = "Empresa já cadastrada";
+        echoResponse(201, $response);
+
+    } else if ($isUserExists) {
+
+        $response["status"] = "error";
+        $response["message"] = "Responsável já cadastrado.";
         echoResponse(201, $response);
 
     } else {
@@ -121,4 +118,41 @@ $app->get('/logout', function() {
     $response["message"] = "Logged out successfully";
     echoResponse(200, $response);
 });
+$app->post('/changePassword', function() use ($app) {
+    
+    require_once 'passwordHash.php';
+
+    $db = new DbHandler();
+    $response = array();
+
+    $requestParams = json_decode($app->request->getBody());
+    $session = $db->getSession();
+
+    $userid = $session['userid'];
+
+    $oldPassword = $requestParams->password->oldpassword;
+    $newPassword = $requestParams->password->password;
+
+    $currentUser = $db->getOneRecord("select nome, senha from usuario where idusuario='$userid'");
+
+    if(passwordHash::check_password($currentUser['senha'], $oldPassword)) {
+        
+        $newPasswordHash = passwordHash::hash($newPassword);
+
+        $db->updateTable("update usuario set senha='$newPasswordHash' where idusuario = '$userid'");
+
+        $response["status"] = "success";
+        $response["message"] = "Senha alterada";
+        echoResponse(200, $response);
+
+    } else {
+
+        $response["status"] = "error";
+        $response["message"] = "Senha atual incorreta";
+        echoResponse(201, $response);
+
+    }
+
+});
+
 ?>
