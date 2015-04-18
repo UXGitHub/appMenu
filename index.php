@@ -25,7 +25,7 @@
               </head>
 
   <body ng-cloak="">
-    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+<!--     <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
       <div class="container">
         <div class="row">
           <div class="navbar-header col-md-8">
@@ -45,9 +45,9 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
     <div >
-      <div class="container" style="margin-top:20px;">
+      <div class="container">
 
         <div data-ng-view="" id="ng-view" class="slide-animation"></div>
 
