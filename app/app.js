@@ -23,6 +23,12 @@ app.config(['$routeProvider',
                 templateUrl: 'partials/dashboard.html',
                 controller: 'authCtrl'
             })
+            .when('/changePassword', {
+                title: 'ChangePassword',
+                templateUrl: 'partials/changepassword.html',
+                controller: 'authCtrl',
+                role: '0'
+            })
             .when('/', {
                 title: 'Login',
                 templateUrl: 'partials/login.html',
@@ -42,6 +48,16 @@ app.config(['$routeProvider',
                     $rootScope.userid = results.userid;
                     $rootScope.name = results.name;
                     $rootScope.email = results.email;
+
+                    if (next.$$route.originalPath && next.$$route.originalPath !== '/') {
+
+                        $location.path(next.$$route.originalPath);
+                        
+                    } else {
+
+                        $location.path('/dashboard');
+                    }
+
                 } else {
                     var nextUrl = next.$$route.originalPath;
                     if (nextUrl == '/signup' || nextUrl == '/login') {

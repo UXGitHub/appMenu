@@ -29,5 +29,19 @@ app.controller('authCtrl', function ($scope, $rootScope, $routeParams, $location
             Data.toast(results);
             $location.path('login');
         });
-    }
+    };
+    $scope.changepassword = {oldpassword:'',password:'',password2:''};
+    $scope.openViewChangePassword = function() {
+        $location.path('changePassword');
+    };
+    $scope.changePassword = function (objPassword) {
+        Data.post('changePassword', {
+            password: objPassword
+        }).then(function(results) {
+            Data.toast(results);
+            if (results.status == "success") {
+                $location.path('dashboard');
+            }
+        });
+    };
 });

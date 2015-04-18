@@ -10,6 +10,9 @@ class DbHandler {
         $db = new dbConnect();
         $this->conn = $db->connect();
     }
+    public function updateTable($query) {
+        $this->conn->query($query);
+    }
     /**
      * Fetching single record
      */
