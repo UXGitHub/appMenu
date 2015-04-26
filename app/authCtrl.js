@@ -44,4 +44,9 @@ app.controller('authCtrl', function ($scope, $rootScope, $routeParams, $location
             }
         });
     };
+
+    $scope.business = {name: '', cnpj: '', address: '', cep: '', city: '', state: '', country: ''};
+    $scope.openEditBusiness = function() {
+        $location.path('editBusiness');
+    };
 });

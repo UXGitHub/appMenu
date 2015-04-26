@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>AppMenu</title>
-    <link href="css/style.css" rel="stylesheet">
+    <!-- <link href="css/style.css" rel="stylesheet"> -->
     <link href="css/toaster.css" rel="stylesheet">
   </head>
   <body>
@@ -25,6 +25,6 @@
   <script src="app/data.js"></script>
   <script src="app/directives.js"></script>
   <!-- CONTROLLERS -->
-  <script src="app/changePasswordCtrl.js"></script>
   <script src="app/authCtrl.js"></script>
+  <script src="app/businessCtrl.js"></script>
 </html>
