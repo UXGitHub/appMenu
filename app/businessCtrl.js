@@ -86,9 +86,6 @@ app.controller('businessCtrl', function ($scope, Data, $q) {
 
         business.CITY = $scope.myCity.NOME;
         business.CITY_ID = $scope.myCity.IDMUNICIPIO;
-
-        console.log(business);
-        console.log($scope.business);
     };
 
 });
