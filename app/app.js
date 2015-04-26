@@ -29,6 +29,12 @@ app.config(['$routeProvider',
                 controller: 'authCtrl',
                 role: '0'
             })
+            .when('/editBusiness', {
+                title: 'EditBusiness',
+                templateUrl: 'partials/editBusiness.html',
+                controller: 'businessCtrl',
+                role: '0'
+            })
             .when('/', {
                 title: 'Login',
                 templateUrl: 'partials/login.html',

@@ -2,9 +2,14 @@
 $app->get('/session', function() {
     $db = new DbHandler();
     $session = $db->getSession();
-    $response["userid"] = $session['userid'];
-    $response["email"] = $session['email'];
-    $response["name"] = $session['name'];
+
+    if (!isset($session['userid'])) {
+
+        $session["userid"] = '';
+        $session["email"] = '';
+        $session["name"] = 'Convidado';
+    }
+    
     echoResponse(200, $session);
 });
 
@@ -114,6 +119,7 @@ $app->post('/signUp', function() use ($app) {
 $app->get('/logout', function() {
     $db = new DbHandler();
     $session = $db->destroySession();
+    
     $response["status"] = "info";
     $response["message"] = "Logged out successfully";
     echoResponse(200, $response);

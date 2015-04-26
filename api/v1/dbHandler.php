@@ -5,14 +5,29 @@ class DbHandler {
     private $conn;
 
     function __construct() {
+
         require_once 'dbConnect.php';
-        // opening db connection
         $db = new dbConnect();
         $this->conn = $db->connect();
     }
+
     public function updateTable($query) {
-        $this->conn->query($query);
+        $this->conn->query($query) or die($this->conn->error.__LINE__);
     }
+
+    public function executeQuery($query) {
+        
+        $values = array();
+
+        $result = $this->conn->query($query) or die($this->conn->error.__LINE__);
+
+        while ($row = $result->fetch_assoc()) {
+            $values[] = $row;
+        }
+        
+        return $values;
+    }
+
     /**
      * Fetching single record
      */
@@ -20,6 +35,7 @@ class DbHandler {
         $r = $this->conn->query($query.' LIMIT 1') or die($this->conn->error.__LINE__);
         return $result = $r->fetch_assoc();    
     }
+
     /**
      * Creating new record
      */
@@ -48,48 +64,31 @@ class DbHandler {
             return NULL;
         }
     }
-public function getSession(){
-    if (!isset($_SESSION)) {
-        session_start();
+
+    public function getSession(){
+        
+        $this->initSession();
+
+        unset($_SESSION['slim.flash']);
+
+        return $_SESSION;
     }
-    $sess = array();
-    if(isset($_SESSION['userid']))
-    {
-        $sess["userid"] = $_SESSION['userid'];
-        $sess["name"] = $_SESSION['name'];
-        $sess["email"] = $_SESSION['email'];
+
+    public function destroySession(){
+        
+        $this->initSession();
+
+        session_unset();
+
     }
-    else
-    {
-        $sess["userid"] = '';
-        $sess["name"] = 'Guest';
-        $sess["email"] = '';
-    }
-    return $sess;
-}
-public function destroySession(){
-    if (!isset($_SESSION)) {
-    session_start();
-    }
-    if(isSet($_SESSION['userid']))
-    {
-        unset($_SESSION['userid']);
-        unset($_SESSION['name']);
-        unset($_SESSION['email']);
-        $info='info';
-        if(isSet($_COOKIE[$info]))
-        {
-            setcookie ($info, '', time() - $cookie_time);
+
+    public function initSession() {
+
+        if (!isset($_SESSION)) {
+
+            session_start();
         }
-        $msg="Logged Out Successfully...";
+
     }
-    else
-    {
-        $msg = "Not logged in...";
-    }
-    return $msg;
-}
  
 }
-
-?>
