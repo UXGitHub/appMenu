@@ -1,4 +1,6 @@
 app.controller('businessCtrl', function ($scope, Data, $q) {
+    
+    $scope.initWindow();
 
     $scope.initWindow = function() {
         var promises = [];
@@ -74,7 +76,6 @@ app.controller('businessCtrl', function ($scope, Data, $q) {
         $scope.myCity = currentCity[0];
     }
 
-    $scope.initWindow();
 
     $scope.saveBusiness = function(business) {
 
