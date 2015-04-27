@@ -21,7 +21,7 @@ $app->post('/login', function() use ($app) {
     $db = new DbHandler();
     $password = $r->customer->password;
     $email = $r->customer->email;
-    $user = $db->getOneRecord("select idusuario, nome, senha, email from usuario where email='$email'");
+    $user = $db->getOneRecord("select idusuario, nome, senha, email, empresa_idempresa from usuario where email='$email'");
     if ($user != NULL) {
         if(passwordHash::check_password($user['senha'],$password)){
         $response['status'] = "success";
@@ -35,6 +35,8 @@ $app->post('/login', function() use ($app) {
         $_SESSION['userid'] = $user['idusuario'];
         $_SESSION['email'] = $email;
         $_SESSION['name'] = $user['nome'];
+        $_SESSION['businessid'] = $user['empresa_idempresa'];
+
         } else {
             $response['status'] = "error";
             $response['message'] = 'Login failed. Incorrect credentials';

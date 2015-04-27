@@ -1,6 +1,4 @@
-app.controller('businessCtrl', function ($scope, Data, $q) {
-    
-    $scope.initWindow();
+app.controller('businessCtrl', function ($scope, Data, $q, $location) {
 
     $scope.initWindow = function() {
         var promises = [];
@@ -34,6 +32,8 @@ app.controller('businessCtrl', function ($scope, Data, $q) {
 
         })
     };
+
+    $scope.initWindow();
 
     $scope.cleanOptions = function() {
         $scope.myState = {};
@@ -87,6 +87,17 @@ app.controller('businessCtrl', function ($scope, Data, $q) {
 
         business.CITY = $scope.myCity.NOME;
         business.CITY_ID = $scope.myCity.IDMUNICIPIO;
+
+        console.log(business);
+
+        Data.post('/saveBusiness', {
+            business: business
+        }).then(function(results) {
+            Data.toast(results);
+            if (results.status == "success") {
+                $location.path('dashboard');
+            }
+        });
     };
 
 });

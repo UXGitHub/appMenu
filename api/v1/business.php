@@ -19,6 +19,46 @@ $app->post('/getBusiness', function() use ($app) {
 	echoResponse(200, $business);
 });
 
+$app->post('/saveBusiness', function() use ($app) {
+	$db = new DbHandler();
+    $session = $db->getSession();
+    $businessId = $session['businessid'];
+
+	$params = json_decode($app->request->getBody());
+	$name = $params->business->NAME;
+	$cnpj = $params->business->CNPJ;
+	$address = ifEmptySet($params->business->ADDRESS);
+	$cep = ifEmptySet($params->business->CEP);
+	$cityId = ifEmptySet($params->business->CITY_ID);
+	$stateId = ifEmptySet($params->business->STATE_ID);
+	$countryId = ifEmptySet($params->business->COUNTRY_ID);
+	$phone1 = ifEmptySet($params->business->PHONE1);
+	$phone2 = ifEmptySet($params->business->PHONE2);
+
+
+	$existBusiness = $db->getOneRecord("SELECT NOME FROM EMPRESA WHERE CNPJ='$cnpj' AND IDEMPRESA = '$businessId'");
+
+	if ($existBusiness) {
+		var_dump($cityId); die;
+
+		$sql = "UPDATE EMPRESA SET NOME = '$name', LOGRADOURO = '$address', CEP = '$cep', 
+				MUNICIPIO_IDMUNICIPIO = '$cityId', ESTADO_IDESTADO = '$stateId', 
+				PAIS_IDPAIS = '$countryId', TEL1 = '$phone1', TEL2 = '$phone2'
+				WHERE IDEMPRESA = '$businessId' AND CNPJ = '$cnpj'";
+
+		$db->updateTable($sql);
+
+		$response["status"] = "success";
+        $response["message"] = "Empresa atualizada";
+        echoResponse(200, $response);
+	} else {
+
+		$response["status"] = "error";
+        $response["message"] = "CNPJ Incorreto";
+        echoResponse(201, $response);
+	}
+});
+
 $app->post('/getCountries', function() {
 	$db = new DbHandler();
 
@@ -42,3 +82,11 @@ $app->post('/getCities', function() {
 
 	echoResponse(200, $states);
 });
+
+function ifEmptySet($string) {
+	if (empty($string)) {
+		$string = null;
+	}
+
+	return $string;
+}

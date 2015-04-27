@@ -18,7 +18,7 @@
             <input type="text" name="ADDRESS" placeholder="Endereço" ng-model="business.ADDRESS"/>
         </div>
         <div >
-            <input type="text" name="CEP" placeholder="CEP" ng-model="business.CEP"/>
+            <input type="text" name="CEP" placeholder="CEP" ng-model="business.CEP" maxlength="8" />
         </div>
         <div >
             <select ng-model="myCountry" ng-options="country.NOME for country in countries | orderBy:'NOME'" ng-change="cleanOptions()"></select>
