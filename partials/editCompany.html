@@ -9,16 +9,16 @@
 <div class="page-content">
     <form name="businessForm">
         <div >
-            <input type="text" name="NAME" placeholder="Nome" ng-model="business.NAME" required/>
+            <input type="text" name="NAME" placeholder="Nome" ng-model="company.NAME" required/>
         </div>
         <div >
-            <input type="text" name="CNPJ" maxlength="14" placeholder="CNPJ" ng-model="business.CNPJ" required/>
+            <input type="text" name="CNPJ" maxlength="14" placeholder="CNPJ" ng-model="company.CNPJ" readonly required/>
         </div>
         <div >
-            <input type="text" name="ADDRESS" placeholder="Endereço" ng-model="business.ADDRESS"/>
+            <input type="text" name="ADDRESS" placeholder="Endereço" ng-model="company.ADDRESS"/>
         </div>
         <div >
-            <input type="text" name="CEP" placeholder="CEP" ng-model="business.CEP" maxlength="8" />
+            <input type="text" name="CEP" placeholder="CEP" ng-model="company.CEP" maxlength="8" />
         </div>
         <div >
             <select ng-model="myCountry" ng-options="country.NOME for country in countries | orderBy:'NOME'" ng-change="cleanOptions()"></select>
@@ -30,13 +30,13 @@
             <select ng-model="myCity" ng-options="city.NOME for city in cities | filter:filterCities | orderBy:'NOME'"></select>
         </div>
         <div >
-            <input type="text" name="PHONE1" placeholder="Telefone" ng-model="business.PHONE1"/>
+            <input type="text" name="PHONE1" placeholder="Telefone" ng-model="company.PHONE1"/>
         </div>
         <div >
-            <input type="text" name="PHONE2" placeholder="Telefone" ng-model="business.PHONE2"/>
+            <input type="text" name="PHONE2" placeholder="Telefone" ng-model="company.PHONE2"/>
         </div>
         <div>
-            <button type="submit" name="submit" ng-click="saveBusiness(business)" data-ng-disabled="businessForm.$invalid">Salvar</button>
+            <button type="submit" name="submit" ng-click="saveCompany(company)" data-ng-disabled="businessForm.$invalid">Salvar</button>
         </div>
     </form>
 </div>

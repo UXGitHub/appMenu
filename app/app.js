@@ -29,10 +29,10 @@ app.config(['$routeProvider',
                 controller: 'authCtrl',
                 role: '0'
             })
-            .when('/editBusiness', {
-                title: 'EditBusiness',
-                templateUrl: 'partials/editBusiness.html',
-                controller: 'businessCtrl',
+            .when('/editCompany', {
+                title: 'EditCompany',
+                templateUrl: 'partials/editCompany.html',
+                controller: 'companyCtrl',
                 role: '0'
             })
             .when('/', {
@@ -55,7 +55,7 @@ app.config(['$routeProvider',
                     $rootScope.name = results.name;
                     $rootScope.email = results.email;
 
-                    if (next.$$route.originalPath && next.$$route.originalPath !== '/') {
+                    if (next.$$route.originalPath && next.$$route.originalPath !== '/' && next.$$route.originalPath !== '/login') {
 
                         $location.path(next.$$route.originalPath);
                         

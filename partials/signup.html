@@ -24,17 +24,26 @@
                                 <label class="col-sm-5 control-label no-padding-right" for="cnpj">CNPJ</label>
                                 <div class="col-sm-7">
                                     <span class="block input-icon input-icon-right">
-                                <input type="text" class="form-control" ng-model="signup.cnpj" required/>
+                                <input type="text" class="form-control" ng-model="signup.cnpj" maxlength="14" required/>
                             </span>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-5 control-label no-padding-right" for="nameBusiness">Razão Social</label>
+                                <label class="col-sm-5 control-label no-padding-right" for="companyName">Razão Social</label>
                                 <div class="col-sm-7">
                                     <span class="block input-icon input-icon-right">
-                                <input type="text" class="form-control" ng-model="signup.nameBusiness" required/>
+                                <input type="text" class="form-control" ng-model="signup.companyName" required/>
                             </span>
                                 </div>
+                            </div>
+                            <div >
+                                <select ng-model="signup.country" ng-options="country.NOME for country in countries | orderBy:'NOME'" ng-change="cleanOptions()" ></select>
+                            </div>
+                            <div >
+                                <select ng-model="signup.state" ng-options="state.NOME for state in states | filter:filterStates | orderBy:'NOME'" ng-change="cleanCity()" ></select>
+                            </div>
+                            <div >
+                                <select ng-model="signup.city" ng-options="city.NOME for city in cities | filter:filterCities | orderBy:'NOME'" ></select>
                             </div>
                             <br/>
                             <h4 class="header blue lighter bigger">
@@ -53,7 +62,7 @@
                                 <label class="col-sm-5 control-label no-padding-right" for="email">Email</label>
                                 <div class="col-sm-7">
                                     <span class="block input-icon input-icon-right">
-                                        <input type="text" class="form-control" name="email" ng-model="signup.email" required/>
+                                        <input type="email" class="form-control" name="email" ng-model="signup.email" required/>
                                         <span ng-show="signupForm.email.$error.email" class="help-inline">Email is not valid</span> 
                                     </span>
                                 </div>

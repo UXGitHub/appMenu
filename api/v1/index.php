@@ -12,7 +12,7 @@ $app = new \Slim\Slim();
 $user_id = NULL;
 
 require_once 'authentication.php';
-require_once 'business.php';
+require_once 'company.php';
 
 /**
  * Verifying required params posted or not

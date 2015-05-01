@@ -26,5 +26,5 @@
   <script src="app/directives.js"></script>
   <!-- CONTROLLERS -->
   <script src="app/authCtrl.js"></script>
-  <script src="app/businessCtrl.js"></script>
+  <script src="app/companyCtrl.js"></script>
 </html>

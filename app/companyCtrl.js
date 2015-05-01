@@ -1,36 +1,25 @@
-app.controller('businessCtrl', function ($scope, Data, $q, $location) {
+app.controller('companyCtrl', function ($scope, Data, $q, $location) {
 
     $scope.initWindow = function() {
         var promises = [];
 
-        promises.push(Data.post('getBusiness'));
+        promises.push(Data.post('getCompany'));
         promises.push(Data.post('getCountries'));
         promises.push(Data.post('getStates'));
         promises.push(Data.post('getCities'));
 
         $q.all(promises).then(function(callback) {
 
-            $scope.business = callback[0];
+            $scope.company = callback[0];
             $scope.countries = callback[1];
             $scope.states = callback[2];
             $scope.cities = callback[3];
+            
+            setCountry();
+            setState();
+            setCity();
 
-            if ($scope.business.COUNTRY) {
-
-                setCountry();
-            }
-
-            if ($scope.business.STATE) {
-
-                setState();
-            }
-
-            if ($scope.business.CITY) {
-
-                setCity();
-            }
-
-        })
+        });
     };
 
     $scope.initWindow();
@@ -54,7 +43,7 @@ app.controller('businessCtrl', function ($scope, Data, $q, $location) {
 
     function setCountry() {
         var currentCountry = $scope.countries.filter(function(country) {
-            return country.NOME === $scope.business.COUNTRY
+            return country.NOME === $scope.company.COUNTRY
         });
 
         $scope.myCountry = currentCountry[0];
@@ -62,7 +51,7 @@ app.controller('businessCtrl', function ($scope, Data, $q, $location) {
 
     function setState() {
         var currentState = $scope.states.filter(function(state) {
-            return state.NOME === $scope.business.STATE
+            return state.NOME === $scope.company.STATE
         });
 
         $scope.myState = currentState[0];
@@ -70,28 +59,28 @@ app.controller('businessCtrl', function ($scope, Data, $q, $location) {
 
     function setCity() {
         var currentCity = $scope.cities.filter(function(city) {
-            return city.NOME === $scope.business.CITY
+            return city.NOME === $scope.company.CITY
         });
 
         $scope.myCity = currentCity[0];
     }
 
 
-    $scope.saveBusiness = function(business) {
+    $scope.saveCompany = function(company) {
 
-        business.COUNTRY = $scope.myCountry.NOME;
-        business.COUNTRY_ID = $scope.myCountry.IDPAIS;
+        company.COUNTRY = $scope.myCountry.NOME;
+        company.COUNTRY_ID = $scope.myCountry.IDPAIS;
 
-        business.STATE = $scope.myState.NOME;
-        business.STATE_ID = $scope.myState.IDESTADO;
+        company.STATE = $scope.myState.NOME;
+        company.STATE_ID = $scope.myState.IDESTADO;
 
-        business.CITY = $scope.myCity.NOME;
-        business.CITY_ID = $scope.myCity.IDMUNICIPIO;
+        company.CITY = $scope.myCity.NOME;
+        company.CITY_ID = $scope.myCity.IDMUNICIPIO;
 
-        console.log(business);
+        console.log(company);
 
-        Data.post('/saveBusiness', {
-            business: business
+        Data.post('/saveCompany', {
+            company: company
         }).then(function(results) {
             Data.toast(results);
             if (results.status == "success") {

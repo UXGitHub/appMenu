@@ -24,7 +24,8 @@ class passwordHash {
     public static function check_password($hash, $password) {
         $full_salt = substr($hash, 0, 29);
         $new_hash = crypt($password, $full_salt);
-        return ($hash == $new_hash);
+        
+        return $hash == $new_hash;
     }
 
 }

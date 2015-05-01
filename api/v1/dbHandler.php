@@ -22,7 +22,7 @@ class DbHandler {
         $result = $this->conn->query($query) or die($this->conn->error.__LINE__);
 
         while ($row = $result->fetch_assoc()) {
-            $values[] = $row;
+            $values[] = array_map('utf8_encode', $row);;
         }
         
         return $values;
@@ -89,6 +89,13 @@ class DbHandler {
             session_start();
         }
 
+    }
+
+    public function insertInSession($name, $value) {
+        
+        $this->initSession();
+
+        $_SESSION[$name] = $value;
     }
  
 }
