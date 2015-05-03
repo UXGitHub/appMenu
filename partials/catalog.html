@@ -1,0 +1,22 @@
+<div>
+    <ul>
+        <li>
+            <a href="#/dashboard">Home</a>
+        </li>
+        <li>Catálogos</li>
+    </ul>
+</div>
+<div class="page-content">
+
+    <button ng-click="getCatalogs()">Atualizar</button>
+    Busca: <input type="text" ng-model="search.NOME">
+    <button ng-click="openViewAddCatalog()">Adicionar</button>
+    <button ng-show="checkedRows.length" ng-click="removeSelectedCatalogs(checkedRows)">Excluir</button>
+    <div infinite-scroll='loadMore()' infinite-scroll-distance='1'>
+        <ul ng-repeat="catalog in catalogs | filter:search | orderBy: 'NOME'">
+            <input type="checkbox" ng-model="checkedRow" ng-change="toogleCheckedRow(checkedRow, catalog)">
+            <span>{{catalog.NOME}}  {{catalog.DESCRICAO}} </span>
+            <button ng-click="editCatalog(catalog)">edit</button>
+        </ul>
+    </div>    
+</div>

@@ -1,4 +1,4 @@
-var app = angular.module('myApp', ['ngRoute', 'ngAnimate', 'toaster']);
+var app = angular.module('myApp', ['ngRoute', 'ngAnimate', 'toaster', 'infinite-scroll']);
 
 app.config(['$routeProvider',
   function ($routeProvider) {
@@ -33,6 +33,18 @@ app.config(['$routeProvider',
                 title: 'EditCompany',
                 templateUrl: 'partials/editCompany.html',
                 controller: 'companyCtrl',
+                role: '0'
+            })
+            .when('/catalog', {
+                title: 'Catalog',
+                templateUrl: 'partials/catalog.html',
+                controller: 'catalogCtrl',
+                role: '0'
+            })
+            .when('/addCatalog', {
+                title: 'AddCatalog',
+                templateUrl: 'partials/addCatalog.html',
+                controller: 'catalogCtrl',
                 role: '0'
             })
             .when('/', {

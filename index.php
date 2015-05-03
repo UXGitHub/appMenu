@@ -17,9 +17,11 @@
   </body>
   <toaster-container toaster-options="{'time-out': 3000}"></toaster-container>
   <!-- Libs -->
+  <script src="js/jquery.js" ></script>
   <script src="js/angular.min.js"></script>
   <script src="js/angular-route.min.js"></script>
   <script src="js/angular-animate.min.js" ></script>
+  <script src="js/ng-infinite-scroll.js" ></script>
   <script src="js/toaster.js"></script>
   <script src="app/app.js"></script>
   <script src="app/data.js"></script>
@@ -27,4 +29,5 @@
   <!-- CONTROLLERS -->
   <script src="app/authCtrl.js"></script>
   <script src="app/companyCtrl.js"></script>
+  <script src="app/catalogCtrl.js"></script>
 </html>

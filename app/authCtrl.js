@@ -54,6 +54,10 @@ app.controller('authCtrl', function ($scope, $location, Data, $q) {
         $location.path('editCompany');
     };
 
+    $scope.openViewCatalog = function() {
+        $location.path('catalog');
+    };
+
     $scope.initView = function() {
         var promises = [];
 

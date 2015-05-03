@@ -1,0 +1,23 @@
+<div>
+    <ul>
+        <li>
+            <a href="#/dashboard">Home</a>
+        </li>
+        <li>Adicionar Catálogos</li>
+    </ul>
+</div>
+<div>
+
+    <form name="addCatalogForm">
+        <div >
+            <input type="text" name="name" placeholder="Nome" ng-model="catalog.name" required/>
+        </div>
+        <div>
+            <input type="text" name="description" placeholder="Descrição" ng-model="catalog.description"/>
+        </div>
+        <div>
+            <button type="submit" name="submit" ng-click="addCatalog(catalog)" data-ng-disabled="addCatalogForm.$invalid">entrar</button>
+        </div>
+    </form>
+
+</div>
