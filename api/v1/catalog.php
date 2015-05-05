@@ -8,7 +8,7 @@ $app->post('/getCatalogs', function() use ($app) {
 
 	$companyId = $session['companyid'];
 
-	$catalogs = $db->executeQuery("SELECT IDCATALOGO, NOME, DESCRICAO FROM CATALOGO
+	$catalogs = $db->executeQuery("SELECT IDCATALOGO, NOME, DESCRICAO FROM catalogo
 		WHERE EMPRESA_IDEMPRESA = '$companyId' ORDER BY NOME");
 
 	if (empty($catalogs)) {

@@ -23,7 +23,7 @@ $app->post('/login', function() use ($app) {
     $password = $params->customer->password;
     $email = $params->customer->email;
 
-    $user = $db->getOneRecord("SELECT IDUSUARIO, NOME, SENHA, EMAIL, EMPRESA_IDEMPRESA FROM USUARIO WHERE EMAIL = '$email'");
+    $user = $db->getOneRecord("SELECT IDUSUARIO, NOME, SENHA, EMAIL, EMPRESA_IDEMPRESA FROM usuario WHERE EMAIL = '$email'");
 
     if ($user) {
 
@@ -81,7 +81,7 @@ $app->post('/signUp', function() use ($app) {
 
     $db = new DbHandler();
 
-    $isUserExists = $db->getOneRecord("SELECT NOME FROM USUARIO WHERE EMAIL = '$email'");
+    $isUserExists = $db->getOneRecord("SELECT NOME FROM usuario WHERE EMAIL = '$email'");
     $isBusinessExists = $db->getOneRecord("SELECT IDEMPRESA FROM EMPRESA WHERE CNPJ = '$cnpj'");
 
     if (!$isBusinessExists && !$isUserExists) {
@@ -147,13 +147,13 @@ $app->post('/changePassword', function() use ($app) {
     $oldPassword = $requestParams->password->oldpassword;
     $newPassword = $requestParams->password->password;
 
-    $currentUser = $db->getOneRecord("SELECT NOME, SENHA FROM USUARIO WHERE IDUSUARIO = '$userid'");
+    $currentUser = $db->getOneRecord("SELECT NOME, SENHA FROM usuario WHERE IDUSUARIO = '$userid'");
 
     if (passwordHash::check_password($currentUser['SENHA'], $oldPassword)) {
         
         $newPasswordHash = passwordHash::hash($newPassword);
 
-        $db->updateTable("UPDATE USUARIO SET SENHA = '$newPasswordHash' WHERE IDUSUARIO = '$userid'");
+        $db->updateTable("UPDATE usuario SET SENHA = '$newPasswordHash' WHERE IDUSUARIO = '$userid'");
 
         $response["status"] = "success";
         $response["message"] = "Senha alterada";
