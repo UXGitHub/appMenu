@@ -2,14 +2,15 @@ app.controller('catalogCtrl', function ($scope, Data, $q, $location) {
 
     $scope.catalog = {name: '', description: ''};
     $scope.checkedRows = [];
-    $scope.positions = 20;
 
+    //@todo create a full search
     $scope.getCatalogs = function() {
         
         Data.post('getCatalogs').then(function(catalogs) {
             
-            $scope.allCatalogs = catalogs;
-            $scope.catalogs = catalogs.slice(0, $scope.positions);
+            $scope.catalogs = catalogs;
+            $scope.itemsPerPage = 20;
+            $scope.checkedRows = [];
 
         });
     };
@@ -36,32 +37,54 @@ app.controller('catalogCtrl', function ($scope, Data, $q, $location) {
         $location.path('addCatalog');
     };
 
-    $scope.toogleCheckedRow = function(checked, row) {
+    $scope.toogleCheckedRow = function(catalog) {
         
-        if (checked) {
+        if (catalog.checkedRow) {
 
-            $scope.checkedRows.push(row);
+            $scope.checkedRows.push(catalog);
 
         } else {
 
-            var index = $scope.checkedRows.indexOf(row);
+            var index = $scope.checkedRows.indexOf(catalog);
             $scope.checkedRows.splice(index, 1);
+            delete catalog.checkedRow;
         }
     };
 
     $scope.removeSelectedCatalogs = function(catalogs) {
-        console.log(catalogs);
+
+        Data.post('removeCatalogs', {catalogs : catalogs});
+        
+        catalogs.forEach(function(catalog) {
+
+            var index = $scope.catalogs.indexOf(catalog);
+            $scope.catalogs.splice(index, 1);
+
+        });
+
+        $scope.checkedRows = [];
+
+        Data.toast({status: 'success', message: 'Catálogos excluídos com sucesso'});
+
     };
 
     $scope.loadMore = function() {
         if ($scope.allCatalogs) {
-            $scope.positions = $scope.positions * 2;
-            $scope.catalogs = $scope.allCatalogs.slice(0, $scope.positions);
+            var itemsPerPage = $scope.catalogs.length + $scope.itemsPerPage;
+            $scope.catalogs = $scope.allCatalogs.slice(0, itemsPerPage);
         }
 
     };
 
     $scope.initWindow();
 
+    $(window).on("scroll", function() {
+        var scrollHeight = $(document).height();
+        var scrollPosition = $(window).height() + $(window).scrollTop();
+        if ((scrollHeight - scrollPosition) / scrollHeight < 0.030) {
+            $scope.itemsPerPage += 20;
+            $scope.$apply();
+        }
+    });
 
 });
