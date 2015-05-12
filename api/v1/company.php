@@ -8,14 +8,14 @@ $app->post('/getCompany', function() use ($app) {
 
 	$companyId = $session['companyid'];
 
-	$company = $db->getOneRecord("SELECT EMPRESA.NOME AS NAME, CNPJ AS CNPJ, 
-		LOGRADOURO AS ADDRESS, CEP AS CEP, MUNICIPIO.NOME AS CITY, ESTADO.NOME AS STATE, 
-		PAIS.NOME AS COUNTRY, TEL1 AS PHONE1, TEL2 AS PHONE2 
-		FROM EMPRESA 
-		JOIN PAIS ON EMPRESA.PAIS_IDPAIS = PAIS.IDPAIS
-		JOIN ESTADO ON EMPRESA.ESTADO_IDESTADO = ESTADO.IDESTADO
-		JOIN MUNICIPIO ON EMPRESA.MUNICIPIO_IDMUNICIPIO = MUNICIPIO.IDMUNICIPIO
-		WHERE IDEMPRESA = '$companyId'");
+	$company = $db->getOneRecord("select empresa.nome as name, cnpj as cnpj, 
+		logradouro as address, cep as cep, municipio.nome as city, estado.nome as state, 
+		pais.nome as country, tel1 as phone1, tel2 as phone2 
+		from empresa 
+		join pais on empresa.pais_idpais = pais.idpais
+		join estado on empresa.estado_idestado = estado.idestado
+		join municipio on empresa.municipio_idmunicipio = municipio.idmunicipio
+		where idempresa = '$companyId'");
 
 	echoResponse(200, $company);
 });
@@ -28,24 +28,24 @@ $app->post('/saveCompany', function() use ($app) {
 
 	$params = json_decode($app->request->getBody());
 
-	$name = $params->company->NAME;
-	$cnpj = $params->company->CNPJ;
-	$cityId = $params->company->CITY_ID;
-	$stateId = $params->company->STATE_ID;
-	$countryId = $params->company->COUNTRY_ID;
-	$cep = (!isset($params->company->CEP)) ? NULL : $params->company->CEP;
-	$address = (!isset($params->company->ADDRESS)) ? NULL : $params->company->ADDRESS;
-	$phone1 = (!isset($params->company->PHONE1)) ? NULL : $params->company->PHONE1;
-	$phone2 = (!isset($params->company->PHONE2)) ? NULL : $params->company->PHONE2;
+	$name = $params->company->name;
+	$cnpj = $params->company->cnpj;
+	$cityId = $params->company->city_id;
+	$stateId = $params->company->state_id;
+	$countryId = $params->company->country_id;
+	$cep = (!isset($params->company->cep)) ? NULL : $params->company->cep;
+	$address = (!isset($params->company->address)) ? NULL : $params->company->address;
+	$phone1 = (!isset($params->company->phone1)) ? NULL : $params->company->phone1;
+	$phone2 = (!isset($params->company->phone2)) ? NULL : $params->company->phone2;
 
-	$existCompany = $db->getOneRecord("SELECT NOME FROM EMPRESA WHERE CNPJ = '$cnpj' AND IDEMPRESA = '$companyId'");
+	$existCompany = $db->getOneRecord("select nome from empresa where cnpj = '$cnpj' and idempresa = '$companyId'");
 
 	if ($existCompany) {
 
-		$sql = "UPDATE EMPRESA SET NOME = '$name', LOGRADOURO = '$address', CEP = '$cep', 
-				MUNICIPIO_IDMUNICIPIO = '$cityId', ESTADO_IDESTADO = '$stateId', 
-				PAIS_IDPAIS = '$countryId', TEL1 = '$phone1', TEL2 = '$phone2'
-				WHERE IDEMPRESA = '$companyId' AND CNPJ = '$cnpj'";
+		$sql = "update empresa set nome = '$name', logradouro = '$address', cep = '$cep', 
+				municipio_idmunicipio = '$cityId', estado_idestado = '$stateId', 
+				pais_idpais = '$countryId', tel1 = '$phone1', tel2 = '$phone2'
+				where idempresa = '$companyId' and cnpj = '$cnpj'";
 
 		$db->updateTable($sql);
 
@@ -64,7 +64,7 @@ $app->post('/saveCompany', function() use ($app) {
 $app->post('/getCountries', function() {
 	$db = new DbHandler();
 
-	$countries = $db->executeQuery("SELECT NOME, SIGLA, IDPAIS FROM PAIS");
+	$countries = $db->executeQuery("select nome, sigla, idpais from pais");
 
 	echoResponse(200, $countries);
 });
@@ -72,14 +72,14 @@ $app->post('/getCountries', function() {
 $app->post('/getStates', function() {
 	$db = new DbHandler();
 
-	$states = $db->executeQuery("SELECT NOME, SIGLA, IDESTADO, PAIS_IDPAIS AS IDPAIS FROM ESTADO");
+	$states = $db->executeQuery("select nome, sigla, idestado, pais_idpais as idpais from estado");
 	echoResponse(200, $states);
 });
 
 $app->post('/getCities', function() {
 	$db = new DbHandler();
 
-	$states = $db->executeQuery("SELECT NOME, SIGLA, IDMUNICIPIO, ESTADO_IDESTADO AS IDESTADO FROM MUNICIPIO");
+	$states = $db->executeQuery("select nome, sigla, idmunicipio, estado_idestado as idestado from municipio");
 
 	echoResponse(200, $states);
 });

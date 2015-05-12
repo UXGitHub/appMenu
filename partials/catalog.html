@@ -11,15 +11,15 @@
 
     <div>
         <button ng-click="getCatalogs()">Atualizar</button>
-        <input type="text" placeholder="Pesquisar" ng-model="search.NOME">
+        <input type="text" placeholder="Pesquisar" ng-model="search.nome">
         <button ng-click="openViewAddCatalog()">Adicionar</button>
         <button ng-show="checkedRows.length" ng-click="removeSelectedCatalogs(checkedRows)">Excluir</button>
     </div>
 
     <!-- <div infinite-scroll='loadMore()' infinite-scroll-distance='1'> -->
-        <ul ng-repeat="catalog in catalogs | filter:search | orderBy: 'NOME' | limitTo: itemsPerPage">
+        <ul ng-repeat="catalog in catalogs | filter:search | orderBy: 'nome' | limitTo: itemsPerPage">
             <input type="checkbox" ng-model="catalog.checkedRow" ng-change="toogleCheckedRow(catalog)">
-            <span>{{catalog.NOME}}  {{catalog.DESCRICAO}} </span>
+            <span>{{catalog.nome}}  {{catalog.descricao}} </span>
             <button ng-click="editCatalog(catalog)">edit</button>
         </ul>
     <!-- </div> -->

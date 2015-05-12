@@ -9,31 +9,31 @@
 <div class="page-content">
     <form name="businessForm">
         <div >
-            <input type="text" name="NAME" placeholder="Nome" ng-model="company.NAME" required/>
+            <input type="text" name="name" placeholder="Nome" ng-model="company.name" required/>
         </div>
         <div >
-            <input type="text" name="CNPJ" maxlength="14" placeholder="CNPJ" ng-model="company.CNPJ" readonly required/>
+            <input type="text" name="cnpj" maxlength="14" placeholder="CNPJ" ng-model="company.cnpj" readonly required/>
         </div>
         <div >
-            <input type="text" name="ADDRESS" placeholder="Endereço" ng-model="company.ADDRESS"/>
+            <input type="text" name="address" placeholder="Endereço" ng-model="company.address"/>
         </div>
         <div >
-            <input type="text" name="CEP" placeholder="CEP" ng-model="company.CEP" maxlength="8" />
+            <input type="text" name="cep" placeholder="cep" ng-model="company.cep" maxlength="8" />
         </div>
         <div >
-            <select ng-model="myCountry" ng-options="country.NOME for country in countries | orderBy:'NOME'" ng-change="cleanOptions()"></select>
+            <select ng-model="myCountry" ng-options="country.nome for country in countries | orderBy:'nome'" ng-change="cleanOptions()"></select>
         </div>
         <div >
-            <select ng-model="myState" ng-options="state.NOME for state in states | filter:filterStates | orderBy:'NOME'" ng-change="cleanCity()"></select>
+            <select ng-model="myState" ng-options="state.nome for state in states | filter:filterStates | orderBy:'nome'" ng-change="cleanCity()"></select>
         </div>
         <div >
-            <select ng-model="myCity" ng-options="city.NOME for city in cities | filter:filterCities | orderBy:'NOME'"></select>
+            <select ng-model="myCity" ng-options="city.nome for city in cities | filter:filterCities | orderBy:'nome'"></select>
         </div>
         <div >
-            <input type="text" name="PHONE1" placeholder="Telefone" ng-model="company.PHONE1"/>
+            <input type="text" name="phone1" placeholder="Telefone" ng-model="company.phone1"/>
         </div>
         <div >
-            <input type="text" name="PHONE2" placeholder="Telefone" ng-model="company.PHONE2"/>
+            <input type="text" name="phone2" placeholder="Telefone" ng-model="company.phone2"/>
         </div>
         <div>
             <button type="submit" name="submit" ng-click="saveCompany(company)" data-ng-disabled="businessForm.$invalid">Salvar</button>

@@ -8,8 +8,8 @@ $app->post('/getCatalogs', function() use ($app) {
 
 	$companyId = $session['companyid'];
 
-	$catalogs = $db->executeQuery("SELECT IDCATALOGO, NOME, DESCRICAO FROM catalogo
-		WHERE EMPRESA_IDEMPRESA = '$companyId' ORDER BY NOME");
+	$catalogs = $db->executeQuery("select idcatalogo, nome, descricao from catalogo
+		where empresa_idempresa = '$companyId' order by nome");
 
 	if (empty($catalogs)) {
 
@@ -29,13 +29,13 @@ $app->post('/addCatalog', function() use ($app) {
 	$companyId = $session['companyid'];
 
 	$catalog = array(
-		'NOME' => $params->catalog->name,
-		'DESCRICAO' => $params->catalog->description,
-		'EMPRESA_IDEMPRESA' => $companyId,
+		'nome' => $params->catalog->name,
+		'descricao' => $params->catalog->description,
+		'empresa_idempresa' => $companyId,
 	);
 
-	$tableName = 'CATALOGO';
-    $columnNames = array('NOME', 'DESCRICAO', 'EMPRESA_IDEMPRESA');
+	$tableName = 'catalogo';
+    $columnNames = array('nome', 'descricao', 'empresa_idempresa');
     $newCatalogRowId = $db->insertIntoTable($catalog, $columnNames, $tableName);
 
 	$response["status"] = "success";
@@ -52,10 +52,10 @@ $app->post('/removeCatalogs', function() use ($app) {
 	$companyId = $session['companyid'];
 
 	foreach ($catalogs->catalogs as $catalog) {
-		// var_dump($catalog);
-		$catalogId = $catalog->IDCATALOGO;
+
+		$catalogId = $catalog->idcatalogo;
 		
-		$sql = "DELETE FROM CATALOGO WHERE EMPRESA_IDEMPRESA = '$companyId' AND IDCATALOGO = '$catalogId'";
+		$sql = "delete from catalogo where empresa_idempresa = '$companyId' and idcatalogo = '$catalogId'";
 
 		$db->delete($sql);
 	}

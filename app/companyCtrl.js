@@ -34,16 +34,16 @@ app.controller('companyCtrl', function ($scope, Data, $q, $location) {
     };
 
     $scope.filterStates = function(state) {
-        return state.IDPAIS === $scope.myCountry.IDPAIS;        
+        return state.idpais === $scope.myCountry.idpais;        
     };
 
     $scope.filterCities = function(city) {
-        return city.IDESTADO === $scope.myState.IDESTADO;
+        return city.idestado === $scope.myState.idestado;
     };
 
     function setCountry() {
         var currentCountry = $scope.countries.filter(function(country) {
-            return country.NOME === $scope.company.COUNTRY
+            return country.nome === $scope.company.country
         });
 
         $scope.myCountry = currentCountry[0];
@@ -51,7 +51,7 @@ app.controller('companyCtrl', function ($scope, Data, $q, $location) {
 
     function setState() {
         var currentState = $scope.states.filter(function(state) {
-            return state.NOME === $scope.company.STATE
+            return state.nome === $scope.company.state
         });
 
         $scope.myState = currentState[0];
@@ -59,7 +59,7 @@ app.controller('companyCtrl', function ($scope, Data, $q, $location) {
 
     function setCity() {
         var currentCity = $scope.cities.filter(function(city) {
-            return city.NOME === $scope.company.CITY
+            return city.nome === $scope.company.city
         });
 
         $scope.myCity = currentCity[0];
@@ -68,14 +68,14 @@ app.controller('companyCtrl', function ($scope, Data, $q, $location) {
 
     $scope.saveCompany = function(company) {
 
-        company.COUNTRY = $scope.myCountry.NOME;
-        company.COUNTRY_ID = $scope.myCountry.IDPAIS;
+        company.country = $scope.myCountry.nome;
+        company.country_id = $scope.myCountry.idpais;
 
-        company.STATE = $scope.myState.NOME;
-        company.STATE_ID = $scope.myState.IDESTADO;
+        company.state = $scope.myState.nome;
+        company.state_id = $scope.myState.idestado;
 
-        company.CITY = $scope.myCity.NOME;
-        company.CITY_ID = $scope.myCity.IDMUNICIPIO;
+        company.city = $scope.myCity.nome;
+        company.city_id = $scope.myCity.idmunicipio;
 
         console.log(company);
 
