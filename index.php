@@ -9,11 +9,9 @@
     <link href="css/toaster.css" rel="stylesheet">
   </head>
   <body>
-  <div id="background"></div>
-    <div>
-      <div class="container">
-        <div data-ng-view="" id="ng-view"></div>
-      </div>
+    <div class="container">
+      <div data-ng-view="" id="ng-view"></div>
+    </div>
   </body>
   <toaster-container toaster-options="{'time-out': 3000}"></toaster-container>
   <!-- Libs -->
