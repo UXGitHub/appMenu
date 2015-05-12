@@ -15,6 +15,10 @@ class DbHandler {
         $this->conn->query($query) or die($this->conn->error.__LINE__);
     }
 
+    public function delete($query) {
+        $this->conn->query($query) or die($this->conn->error.__LINE__);
+    }
+
     public function executeQuery($query) {
         
         $values = array();

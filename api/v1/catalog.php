@@ -43,3 +43,21 @@ $app->post('/addCatalog', function() use ($app) {
 
     echoResponse(200, $response);
 });
+
+$app->post('/removeCatalogs', function() use ($app) {
+
+	$catalogs = json_decode($app->request->getBody());
+	$db = new DbHandler();
+    $session = $db->getSession();
+	$companyId = $session['companyid'];
+
+	foreach ($catalogs->catalogs as $catalog) {
+		// var_dump($catalog);
+		$catalogId = $catalog->IDCATALOGO;
+		
+		$sql = "DELETE FROM CATALOGO WHERE EMPRESA_IDEMPRESA = '$companyId' AND IDCATALOGO = '$catalogId'";
+
+		$db->delete($sql);
+	}
+
+});
