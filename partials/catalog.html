@@ -20,16 +20,3 @@
         </ul>
     </div>    
 </div>
-
-<input type="text" ng-model="nameFilter" />
-    <a href="#" ng-click="order = 'id'">Order by id</a>
-    <a href="#" ng-click="order = 'name'">Order by name</a>
-    <a href="#" ng-click="order = 'age'">Order by age</a>
-
-    <ul class="grid" masonry="true">
-        <li ng-repeat="item in items | filter: { name: nameFilter } | orderBy: order">
-            <span>{{item.name}}</span>
-            <br /> <span>Age: {{item.age}}</span>
-            <br /> <span>Company: {{item.company}}</span>
-        </li>
-    </ul>

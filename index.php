@@ -23,8 +23,7 @@
   <script src="js/angular-animate.min.js" ></script>
   <script src="js/ng-infinite-scroll.js" ></script>
   <script src="js/toaster.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/masonry/2.1.08/jquery.masonry.min.js"></script>
-
+  
   <script src="app/app.js"></script>
   <script src="app/data.js"></script>
   <script src="app/directives.js"></script>
