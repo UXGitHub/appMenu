@@ -16,26 +16,14 @@
         <button ng-show="checkedRows.length" ng-click="removeSelectedCatalogs(checkedRows)">Excluir</button>
     </div>
 
-    <!-- <ul class="masonry" > -->
-        <!-- <li ng-repeat="catalog in catalogs | filter:search | orderBy: 'nome' | limitTo: itemsPerPage"> -->
-            <!-- <a ng-model="catalog.checkedRow" ng-focus="toogleCheckedRow(catalog)"> -->
-            <!--     <span class="item"  >
-                    <p>{{catalog.nome}}</p>
-                    <p>{{catalog.descricao}}</p>
-                </span> -->
-            <!-- </a> -->
-<!--                 <input type="checkbox" ng-model="catalog.checkedRow" ng-change="toogleCheckedRow(catalog)">
-            <span>{{catalog.nome}}  {{catalog.descricao}} </span>
-            <button ng-click="editCatalog(catalog)">edit</button> -->
-        <!-- </li> -->
-    <!-- </ul> -->
-
-    <div class="masonry">
-        <div ng-repeat="catalog in catalogs | filter:search | orderBy: 'nome' | limitTo: itemsPerPage" class="item">
+    <ul class="masonry">
+        <li ng-repeat="catalog in catalogs | filter:search | orderBy: 'nome' | limitTo: itemsPerPage" class="item">
             <p>{{catalog.nome}}</p>
             <p>{{catalog.descricao}}</p>
-        </div>
-    </div>
+        </li>
+    </ul>
 
+<!--<input type="checkbox" ng-model="catalog.checkedRow" ng-change="toogleCheckedRow(catalog)"> -->
+<!--<button ng-click="editCatalog(catalog)">edit</button>-->
 
 </div>
