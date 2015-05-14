@@ -20,6 +20,10 @@
         <li ng-repeat="catalog in catalogs | filter:search | orderBy: 'nome' | limitTo: itemsPerPage" class="item">
             <p>{{catalog.nome}}</p>
             <p>{{catalog.descricao}}</p>
+            <p class="actions">
+                <span ng-click="editCatalog(catalog)">editar</span>
+                <span ng-click="removeSelectedCatalogs(checkedRows)">excluir</span>
+            </p>
         </li>
     </ul>
 
