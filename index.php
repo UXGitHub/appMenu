@@ -33,19 +33,19 @@
           <div class="menu-main-menu-container">
             <ul id="menu-main-menu" class="menu">
               <li id="dashboard" class="menu-item">
-                <a href="#">DASHBOARD</a>
+                <a href="#/dashboard">DASHBOARD</a>
               </li>
               <li id="changePassword" class="menu-item">
-                <a href="#">TROCAR SENHA</a>
+                <a href="#/alterar-senha">ALTERAR SENHA</a>
               </li>
-              <li id="editCompany" class="menu-item">
-                <a href="#">EDITAR EMPRESA</a>
+              <li id="company" class="menu-item">
+                <a href="#/empresa">EMPRESA</a>
               </li>
               <li id="catalog" class="menu-item">
-                <a href="#">CATÁLOGO</a>
+                <a href="#/catalogo">CATÁLOGO</a>
               </li>
               <li id="logout" class="menu-item">
-                <a href="#">SAIR</a>
+                <a href="#/logout">SAIR</a>
               </li>
             </ul>
           </div>

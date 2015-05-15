@@ -11,7 +11,7 @@ app.config(['$routeProvider',
             .when('/logout', {
                 title: 'Logout',
                 templateUrl: 'partials/login.html',
-                controller: 'logoutCtrl'
+                controller: 'authCtrl'
             })
             .when('/signup', {
                 title: 'Signup',
@@ -23,19 +23,19 @@ app.config(['$routeProvider',
                 templateUrl: 'partials/dashboard.html',
                 controller: 'authCtrl'
             })
-            .when('/changePassword', {
+            .when('/alterar-senha', {
                 title: 'ChangePassword',
-                templateUrl: 'partials/changepassword.html',
+                templateUrl: 'partials/change-password.html',
                 controller: 'authCtrl',
                 role: '0'
             })
-            .when('/editCompany', {
-                title: 'EditCompany',
-                templateUrl: 'partials/editCompany.html',
+            .when('/empresa', {
+                title: 'Company',
+                templateUrl: 'partials/company.html',
                 controller: 'companyCtrl',
                 role: '0'
             })
-            .when('/catalog', {
+            .when('/catalogo', {
                 title: 'Catalog',
                 templateUrl: 'partials/catalog.html',
                 controller: 'catalogCtrl',
@@ -67,13 +67,25 @@ app.config(['$routeProvider',
                     $rootScope.name = results.name;
                     $rootScope.email = results.email;
 
-                    if (next.$$route.originalPath && next.$$route.originalPath !== '/' && next.$$route.originalPath !== '/login') {
+                    if (next.$$route.originalPath && 
+                        next.$$route.originalPath !== '/' && 
+                        next.$$route.originalPath !== '/login') {
 
                         $location.path(next.$$route.originalPath);
                         
                     } else {
 
                         $location.path('/dashboard');
+                    }
+
+                    if(next.$$route.originalPath && 
+                        next.$$route.originalPath == '/logout') {
+
+                        Data.get('logout').then(function (results) {
+                            Data.toast(results);
+                            $location.path('login');
+                        });
+
                     }
 
                 } else {

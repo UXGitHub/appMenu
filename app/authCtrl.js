@@ -28,10 +28,12 @@ app.controller('authCtrl', function ($scope, $location, Data, $q) {
     };
 
     $scope.logout = function () {
+
         Data.get('logout').then(function (results) {
             Data.toast(results);
             $location.path('login');
         });
+
     };
 
     $scope.openViewChangePassword = function() {
