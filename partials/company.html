@@ -1,42 +1,116 @@
-<div class="breadcrumbs" id="breadcrumbs">
-    <ul class="breadcrumb">
-        <li>
-            <a href="#/dashboard">Home</a>
-        </li>
-        <li class="active">Editar empresa</li>
-    </ul>
-</div>
-<div class="page-content">
-    <form name="businessForm">
-        <div >
-            <input type="text" name="name" placeholder="Nome" ng-model="company.name" required/>
+<div id="primary" class="content-area">
+
+    <main id="main" class="site-main" role="main">
+
+        <div id="hero" class="site-hero">
+            <div class="hero__caption">
+                <h1 class="first-line">Empresa</h1>
+            </div>
+        </div><!-- #hero -->
+
+
+        <div class="single-content" id="single-content">
+
+            <article id="post-248" class="post-248 page type-page status-publish hentry">
+
+                <div class="entry-content">
+
+                    <div class="section-wrap">
+
+                        <section class="section">
+                            <h2>INFO
+                                <b></b>
+                                <b>{{company.name}}</b>
+                                <b>{{company.cnpj}}</b>
+                            </h2>
+                            <div class="section-content">
+                            <h4>Mantenha seu cadastro sempre atualizado. Através dele aprimoramos nosso relacionamento para oferecer serviços de maior qualidade e agilidade.</h4>
+                            </div>
+                            <div class="split left"></div>
+                        </section>
+
+                        <section class="section">
+                            <div class="section-content">
+                                <div role="form" class="wpcf7" id="wpcf7-f485-p248-o1" lang="en-US" dir="ltr">
+                                    <form name="businessForm">
+                                        <p>
+                                            <label for="address">Endereço</label>
+                                            <input type="text" name="address" ng-model="company.address"/>
+                                        </p>
+                                        <p>
+                                            <label for="cep">CEP</label>
+                                            <input type="text" name="cep" ng-model="company.cep"/>
+                                        </p>                         
+                                        <p>
+                                            <label for="state">Estado</label>
+                                            <select ng-model="myState" ng-options="state.nome for state in states | filter:filterStates | orderBy:'nome'" ng-change="cleanCity()"></select>
+                                        </p>
+                                        <p>
+                                            <label for="city">Município</label>
+                                            <select name="city" ng-model="myCity" ng-options="city.nome for city in cities | filter:filterCities | orderBy:'nome'"></select>
+                                        </p>                        
+                                        <p>
+                                            <label for="phone1">Telefone¹</label>
+                                            <input type="text" name="phone1" ng-model="company.phone1"/>
+                                        </p>
+                                        <p>
+                                            <label for="phone1">Telefone²</label>
+                                            <input type="text" name="phone2" ng-model="company.phone2"/>
+                                        </p>
+                                        <p>
+                                            <button type="submit" name="submit" ng-click="saveCompany(company)" data-ng-disabled="businessForm.$invalid" class="wpcf7-form-control wpcf7-submit" >Atualizar</button>
+                                        </p>
+                                    </form>
+                                </div>
+                            </div>
+
+                            <div class="split left"></div>
+
+                        </section>
+
+                        <section class="section">
+
+                            <h2>PERGUNTAS FREQUENTES</h2>
+
+                            <div class="section-content">
+                                
+                                <h4>Quem pode alterar os dados da empresa?</h4>
+                                <p>
+                                    <i>Para alterar os dados da empresa, é necessário ser o Responsável Legal.
+                                    Não há limites em relação ao número de sujeitos a serem cadastrados para cada empresa, contudo, deve‐se ter o cuidado devido às funções que cada um desses pode desempenhar.
+                                    </i>
+                                </p>
+
+                                <div class="split left"></div>
+                                
+                                <h4>Como fazer para relacionar mais operadores a minha empresa?</h4>
+                                <p>
+                                    <i>Para relacionar usuários em uma determinada empresa, é necessário fazer o cadastro de um novo usuário na página <a href="#">cadastrar novo usuário</a> e informar em qual empresa ele pertence.
+                                    </i>
+                                </p>
+
+                                <div class="split left"></div>
+
+                                <h4>Como fazer para cadastrar uma nova empresa?</h4>
+                                <p>
+                                    <i>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore <a href="#">magnam aliquam quaerat voluptatem</a>.
+                                    </i>
+                                </p>
+
+                            </div>
+
+                        </section>
+
+                    </div>
+
+                    <div class="clearfix"></div>
+
+                </div>
+
+            </article>
+
         </div>
-        <div >
-            <input type="text" name="cnpj" maxlength="14" placeholder="CNPJ" ng-model="company.cnpj" readonly required/>
-        </div>
-        <div >
-            <input type="text" name="address" placeholder="Endereço" ng-model="company.address"/>
-        </div>
-        <div >
-            <input type="text" name="cep" placeholder="cep" ng-model="company.cep" maxlength="8" />
-        </div>
-        <div >
-            <select ng-model="myCountry" ng-options="country.nome for country in countries | orderBy:'nome'" ng-change="cleanOptions()"></select>
-        </div>
-        <div >
-            <select ng-model="myState" ng-options="state.nome for state in states | filter:filterStates | orderBy:'nome'" ng-change="cleanCity()"></select>
-        </div>
-        <div >
-            <select ng-model="myCity" ng-options="city.nome for city in cities | filter:filterCities | orderBy:'nome'"></select>
-        </div>
-        <div >
-            <input type="text" name="phone1" placeholder="Telefone" ng-model="company.phone1"/>
-        </div>
-        <div >
-            <input type="text" name="phone2" placeholder="Telefone" ng-model="company.phone2"/>
-        </div>
-        <div>
-            <button type="submit" name="submit" ng-click="saveCompany(company)" data-ng-disabled="businessForm.$invalid">Salvar</button>
-        </div>
-    </form>
+    
+    </main>
+
 </div>

@@ -1,14 +1,24 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="myApp">
+<!--[if IE 8 ]>
+<html class="no-js ie8 loading" lang="en-US" ng-app="myApp">
+<![endif]-->
+<!--[if IE 9 ]>
+<html class="no-js ie9 loading" lang="en-US" ng-app="myApp">
+<![endif]-->
+<!--[if gt IE 8]><!--> 
+<html class="loadingx" lang="en-US" ng-app="myApp">
+<!--<![endif]-->
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>AppMenu</title>
+    <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Cabin%3A400%2C500%2C700&#038;ver=4.2.2' type='text/css' media='all' />
+    <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Merriweather%3A400%2C300&#038;ver=4.2.2' type='text/css' media='all' />
     <link href="css/style.css" rel="stylesheet">
     <link href="css/toaster.css" rel="stylesheet">
   </head>
-  <body>
+  <body class="page">
 
     <div id="page" class="hfeed site">
 
@@ -59,9 +69,7 @@
 
     </div>
 
-    <div class="container">
-      <div data-ng-view="" id="ng-view"></div>
-    </div>
+    <div data-ng-view id="content" class="site-content"></div>
 
     <div class="site-overlay"></div>
     
@@ -73,12 +81,13 @@
 
   <toaster-container toaster-options="{'time-out': 3000}"></toaster-container>
 
-  <!-- Libs -->
+  <!-- LIBS -->
   
   <script src="js/jquery.js"></script>
   <script src="js/angular.min.js"></script>
   <script src="js/angular-route.min.js"></script>
   <script src="js/angular-animate.min.js"></script>
+  <script src='js/masonry.min.js'></script>
   <script src="js/toaster.js"></script>
   <script src="js/environment.js"></script>
   

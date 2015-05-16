@@ -1,33 +1,30 @@
-<div>
-    <ul>
-        <li>
-            <a href="#/dashboard">Home</a>
-        </li>
-        <li>Catálogos</li>
-    </ul>
+<div id="hero" class="site-hero">
+    <div class="hero__caption">
+        <h1 class="first-line">Catálogos</h1>
+    </div>
 </div>
 
-<div class="page-content">
+<div id="main" role="main" class="masonry">
 
-    <div>
-        <button ng-click="getCatalogs()">Atualizar</button>
-        <input type="text" placeholder="Pesquisar" ng-model="search.nome">
-        <button ng-click="openViewAddCatalog()">Adicionar</button>
-        <button ng-show="checkedRows.length" ng-click="removeSelectedCatalogs(checkedRows)">Excluir</button>
+    <article masonry ng-repeat="catalog in catalogs" id="post-1" class="masonry-item box post-1 post type-post status-publish format-standard has-post-thumbnail hentry category-uncategorized tag-adventure tag-experience">
+    <div class="box-inner">
+    <div class="box-inner__i">
+    <header class="box-header">
+    <h1 class="box-title"><a href="#">{{catalog.nome}}</a></h1>
+    <div class="split"></div>
+    <div class="box-meta">
+    <div class="box-content box-meta__time">
+    uncategorized                           </div>
+    </div>
+    </header>
+
+
+    <div class="box-content">
+    <p>{{catalog.descricao}}</p>
     </div>
 
-    <ul class="masonry">
-        <li ng-repeat="catalog in catalogs | filter:search | orderBy: 'nome' | limitTo: itemsPerPage" class="item">
-            <p>{{catalog.nome}}</p>
-            <p>{{catalog.descricao}}</p>
-            <p class="actions">
-                <span ng-click="editCatalog(catalog)">editar</span>
-                <span ng-click="removeSelectedCatalogs(checkedRows)">excluir</span>
-            </p>
-        </li>
-    </ul>
-
-<!--<input type="checkbox" ng-model="catalog.checkedRow" ng-change="toogleCheckedRow(catalog)"> -->
-<!--<button ng-click="editCatalog(catalog)">edit</button>-->
+    </div>
+    </div>
+    </article>
 
 </div>
