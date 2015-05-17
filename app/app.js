@@ -47,6 +47,30 @@ app.config(['$routeProvider',
                 controller: 'catalogCtrl',
                 role: '0'
             })
+            .when('/categorias', {
+                title: 'Categories',
+                templateUrl: 'partials/categories.html',
+                controller: 'categoriesCtrl',
+                role: '0'
+            })
+            .when('/adicionar-categorias', {
+                title: 'AddCategories',
+                templateUrl: 'partials/addCategories.html',
+                controller: 'categoriesCtrl',
+                role: '0'
+            })
+            .when('/produtos', {
+                title: 'Products',
+                templateUrl: 'partials/products.html',
+                controller: 'productCtrl',
+                role: '0'
+            })
+            .when('/adicionar-produtos', {
+                title: 'AddProducts',
+                templateUrl: 'partials/addProducts.html',
+                controller: 'productCtrl',
+                role: '0'
+            })
             .when('/', {
                 title: 'Login',
                 templateUrl: 'partials/login.html',

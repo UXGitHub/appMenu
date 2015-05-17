@@ -54,6 +54,12 @@
               <li id="catalog" class="menu-item">
                 <a href="#/catalogo">CATÁLOGO</a>
               </li>
+              <li id="catalog" class="menu-item">
+                <a href="#/categorias">CATEGORIAS</a>
+              </li>
+              <li id="catalog" class="menu-item">
+                <a href="#/produtos">PRODUTOS</a>
+              </li>
               <li id="logout" class="menu-item">
                 <a href="#/logout">SAIR</a>
               </li>
@@ -100,5 +106,7 @@
   <script src="app/authCtrl.js"></script>
   <script src="app/companyCtrl.js"></script>
   <script src="app/catalogCtrl.js"></script>
+  <script src="app/categoriesCtrl.js"></script>
+  <script src="app/productCtrl.js"></script>
 
 </html>

@@ -1,0 +1,34 @@
+<div id="hero" class="site-hero">
+    <div class="hero__caption">
+        <h1 class="first-line">Produtos</h1>
+    </div>
+</div>
+
+<button ng-click="createProduct()" class="wpcf7-form-control wpcf7-submit">Adicionar</button>
+
+<div id="main" role="main" class="masonry" ng-init="initWindow()">
+
+    <article masonry ng-repeat="product in products" id="post-1" class="masonry-item box post-1 post type-post status-publish format-standard has-post-thumbnail hentry tag-adventure tag-experience">
+    <div class="box-inner">
+    <div class="box-inner__i">
+    <header class="box-header">
+    <h1 class="box-title"><a href="#">{{product.nome}}</a></h1>
+    <div class="split"></div>
+    <div class="box-meta">
+    </div>
+    </header>
+
+    <div class="box-content">
+    <p>{{product.descricao}}</p>
+    <p>{{product.categoria}}</p>
+    <p>{{product.catalogo}}</p>
+    </div>
+    <div class="box-content">
+    <button ng-click="removeProduct(product)" class="wpcf7-form-control wpcf7-submit">Remove</button>
+    </div>
+
+    </div>
+    </div>
+    </article>
+
+</div>

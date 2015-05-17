@@ -1,0 +1,30 @@
+<div id="hero" class="site-hero">
+    <div class="hero__caption">
+        <h1 class="first-line">Categorias</h1>
+    </div>
+</div>
+
+<button ng-click="createCategory()" class="wpcf7-form-control wpcf7-submit">Adicionar</button>
+
+<div id="main" role="main" class="masonry" ng-init="initWindow()">
+
+    <article masonry ng-repeat="category in categories" id="post-1" class="masonry-item box post-1 post type-post status-publish format-standard has-post-thumbnail hentry tag-adventure tag-experience">
+    <div class="box-inner">
+    <div class="box-inner__i">
+    <header class="box-header">
+    <h1 class="box-title"><a href="#">{{category.nome}}</a></h1>
+    <div class="split"></div>
+    <div class="box-meta">
+    </div>
+    </header>
+
+
+    <div class="box-content">
+    <button ng-click="removeCategory(category)" class="wpcf7-form-control wpcf7-submit">Remove</button>
+    </div>
+
+    </div>
+    </div>
+    </article>
+
+</div>
