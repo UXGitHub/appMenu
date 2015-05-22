@@ -3,7 +3,6 @@ app.controller('catalogCtrl', function ($scope, Data, $q, $location) {
     $scope.catalog = {name: '', description: ''};
     $scope.checkedRows = [];
 
-    //@todo create a full search
     $scope.getCatalogs = function() {
         
         Data.post('getCatalogs').then(function(catalogs) {

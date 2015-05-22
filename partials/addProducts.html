@@ -33,6 +33,14 @@
                                             <textarea ng-model="product.description"></textarea>
                                         </p>
                                         <p>
+                                            <label for="state">Estado</label>
+                                            <select ng-model="myState" ng-options="state.nome for state in states | filter:filterStates | orderBy:'nome'" ng-change="cleanCity()"></select>
+                                        </p>
+                                        <p>
+                                            <label for="state">Estado</label>
+                                            <select ng-model="myState" ng-options="state.nome for state in states | filter:filterStates | orderBy:'nome'" ng-change="cleanCity()"></select>
+                                        </p>
+                                        <p>
                                             <button type="submit" name="submit" ng-click="saveProduct(category)" data-ng-disabled="productForm.$invalid" class="wpcf7-form-control wpcf7-submit">Salvar</button>
                                         </p>
                                     </form>

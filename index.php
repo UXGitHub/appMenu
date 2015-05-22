@@ -91,6 +91,7 @@
   
   <script src="js/jquery.js"></script>
   <script src="js/angular.min.js"></script>
+  <script src="js/angular-masonry.js"></script>
   <script src="js/angular-route.min.js"></script>
   <script src="js/angular-animate.min.js"></script>
   <script src='js/masonry.min.js'></script>

@@ -4,27 +4,28 @@
     </div>
 </div>
 
-<div id="main" role="main" class="masonry">
+<input type="text" ng-model="search.nome" />
+<div masonry preserve-order id="main" role="main" class="masonry">
 
-    <article masonry ng-repeat="catalog in catalogs" id="post-1" class="masonry-item box post-1 post type-post status-publish format-standard has-post-thumbnail hentry category-uncategorized tag-adventure tag-experience">
-    <div class="box-inner">
-    <div class="box-inner__i">
-    <header class="box-header">
-    <h1 class="box-title"><a href="#">{{catalog.nome}}</a></h1>
-    <div class="split"></div>
-    <div class="box-meta">
-    <div class="box-content box-meta__time">
-    uncategorized                           </div>
-    </div>
-    </header>
+    <article class="masonry-brick box post-1 post type-post status-publish format-standard has-post-thumbnail hentry category-uncategorized tag-adventure tag-experience" ng-repeat="catalog in catalogs | filter: search | limitTo: itemsPerPage" >
 
+        <div class="box-inner">
+            <div class="box-inner__i">
 
-    <div class="box-content">
-    <p>{{catalog.descricao}}</p>
-    </div>
+                <header class="box-header">
+                    <h1 class="box-title"><a href="#">{{catalog.nome}}</a></h1>
+                    <div class="split"></div>
+                    <div class="box-meta">
+                        <div class="box-content box-meta__time"></div>
+                    </div>
+                </header>
 
-    </div>
-    </div>
+                <div class="box-content">
+                    <p>{{catalog.descricao}}</p>
+                </div>
+
+            </div>
+        </div>
     </article>
-
+    
 </div>
