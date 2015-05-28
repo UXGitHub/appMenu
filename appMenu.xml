@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- SQL XML created by WWW SQL Designer, https://github.com/ondras/wwwsqldesigner/ -->
+<!-- Active URL: http://ondras.zarovi.cz/sql/demo/ -->
+<sql>
+<datatypes db="mysql">
+	<group label="Numeric" color="rgb(238,238,170)">
+		<type label="Integer" length="0" sql="INTEGER" re="INT" quote=""/>
+		<type label="Decimal" length="1" sql="DECIMAL" re="DEC" quote=""/>
+		<type label="Single precision" length="0" sql="FLOAT" quote=""/>
+		<type label="Double precision" length="0" sql="DOUBLE" re="DOUBLE" quote=""/>
+	</group>
+
+	<group label="Character" color="rgb(255,200,200)">
+		<type label="Char" length="1" sql="CHAR" quote="'"/>
+		<type label="Varchar" length="1" sql="VARCHAR" quote="'"/>
+		<type label="Text" length="0" sql="MEDIUMTEXT" re="TEXT" quote="'"/>
+		<type label="Binary" length="1" sql="BINARY" quote="'"/>
+		<type label="Varbinary" length="1" sql="VARBINARY" quote="'"/>
+		<type label="BLOB" length="0" sql="BLOB" re="BLOB" quote="'"/>
+	</group>
+
+	<group label="Date &amp; Time" color="rgb(200,255,200)">
+		<type label="Date" length="0" sql="DATE" quote="'"/>
+		<type label="Time" length="0" sql="TIME" quote="'"/>
+		<type label="Datetime" length="0" sql="DATETIME" quote="'"/>
+		<type label="Year" length="0" sql="YEAR" quote=""/>
+		<type label="Timestamp" length="0" sql="TIMESTAMP" quote="'"/>
+	</group>
+	
+	<group label="Miscellaneous" color="rgb(200,200,255)">
+		<type label="ENUM" length="1" sql="ENUM" quote=""/>
+		<type label="SET" length="1" sql="SET" quote=""/>
+	</group>
+</datatypes><table x="379" y="511" name="COMPANIES">
+<row name="ID" null="0" autoincrement="1">
+<datatype>INTEGER</datatype>
+</row>
+<row name="COUNTRY_ID" null="0" autoincrement="0">
+<datatype>INTEGER</datatype>
+<relation table="COUNTRY" row="ID" />
+</row>
+<row name="STATE_ID" null="0" autoincrement="0">
+<datatype>INTEGER</datatype>
+<relation table="STATE" row="ID" />
+</row>
+<row name="CITY_ID" null="0" autoincrement="0">
+<datatype>INTEGER</datatype>
+<relation table="CITY" row="ID" />
+</row>
+<row name="REGISTRATION" null="0" autoincrement="0">
+<datatype>INTEGER</datatype>
+</row>
+<key type="PRIMARY" name="">
+<part>ID</part>
+</key>
+</table>
+<table x="652" y="461" name="USERS">
+<row name="ID" null="0" autoincrement="1">
+<datatype>INTEGER</datatype>
+</row>
+<row name="COMPANY_ID" null="0" autoincrement="0">
+<datatype>INTEGER</datatype>
+<relation table="COMPANIES" row="ID" />
+</row>
+<key type="PRIMARY" name="">
+<part>ID</part>
+</key>
+</table>
+<table x="651" y="381" name="ROLES">
+<row name="ID" null="0" autoincrement="1">
+<datatype>INTEGER</datatype>
+</row>
+<row name="COMPANY_ID" null="0" autoincrement="0">
+<datatype>INTEGER</datatype>
+<relation table="COMPANIES" row="ID" />
+</row>
+<key type="PRIMARY" name="">
+<part>ID</part>
+</key>
+</table>
+<table x="651" y="549" name="CATALOGS">
+<row name="ID" null="0" autoincrement="1">
+<datatype>INTEGER</datatype>
+</row>
+<row name="COMPANY_ID" null="0" autoincrement="0">
+<datatype>INTEGER</datatype>
+<relation table="COMPANIES" row="ID" />
+</row>
+<key type="PRIMARY" name="">
+<part>ID</part>
+</key>
+</table>
+<table x="651" y="636" name="CATEGORIES">
+<row name="ID" null="0" autoincrement="1">
+<datatype>INTEGER</datatype>
+</row>
+<row name="COMPANY_ID" null="0" autoincrement="0">
+<datatype>INTEGER</datatype>
+<relation table="COMPANIES" row="ID" />
+</row>
+<key type="PRIMARY" name="">
+<part>ID</part>
+</key>
+</table>
+<table x="655" y="820" name="PRODUCTS">
+<row name="ID" null="0" autoincrement="1">
+<datatype>INTEGER</datatype>
+</row>
+<row name="COMPANY_ID" null="0" autoincrement="0">
+<datatype>INTEGER</datatype>
+<relation table="COMPANIES" row="ID" />
+</row>
+<key type="PRIMARY" name="">
+<part>ID</part>
+</key>
+</table>
+<table x="653" y="727" name="FILTERS">
+<row name="ID" null="0" autoincrement="1">
+<datatype>INTEGER</datatype>
+</row>
+<row name="COMPANY_ID" null="0" autoincrement="0">
+<datatype>INTEGER</datatype>
+<relation table="COMPANIES" row="ID" />
+</row>
+<key type="PRIMARY" name="">
+<part>ID</part>
+</key>
+</table>
+<table x="902" y="262" name="ROLES_USERS">
+<row name="ID" null="0" autoincrement="1">
+<datatype>INTEGER</datatype>
+</row>
+<row name="ROLE_ID" null="0" autoincrement="0">
+<datatype>INTEGER</datatype>
+<relation table="ROLES" row="ID" />
+</row>
+<row name="USER_ID" null="0" autoincrement="0">
+<datatype>INTEGER</datatype>
+<relation table="USERS" row="ID" />
+</row>
+<key type="PRIMARY" name="">
+<part>ID</part>
+</key>
+</table>
+<table x="902" y="639" name="CATEGORY_PRODUCTS">
+<row name="ID" null="0" autoincrement="1">
+<datatype>INTEGER</datatype>
+</row>
+<row name="CATEGORY_ID" null="0" autoincrement="0">
+<datatype>INTEGER</datatype>
+<relation table="CATEGORIES" row="ID" />
+</row>
+<row name="PRODUCT_ID" null="0" autoincrement="0">
+<datatype>INTEGER</datatype>
+<relation table="PRODUCTS" row="ID" />
+</row>
+<key type="PRIMARY" name="">
+<part>ID</part>
+</key>
+</table>
+<table x="899" y="371" name="FILTERS_CATEGORIES">
+<row name="ID" null="0" autoincrement="1">
+<datatype>INTEGER</datatype>
+</row>
+<row name="FILTER_ID" null="0" autoincrement="0">
+<datatype>INTEGER</datatype>
+<relation table="FILTERS" row="ID" />
+</row>
+<row name="CATEGORY_ID" null="0" autoincrement="0">
+<datatype>INTEGER</datatype>
+<relation table="CATEGORIES" row="ID" />
+</row>
+<row name="SORT" null="0" autoincrement="0">
+<datatype>INTEGER</datatype>
+</row>
+<key type="PRIMARY" name="">
+<part>ID</part>
+</key>
+</table>
+<table x="905" y="753" name="FILTER_OPTIONS">
+<row name="ID" null="0" autoincrement="1">
+<datatype>INTEGER</datatype>
+</row>
+<row name="FILTER_ID" null="0" autoincrement="0">
+<datatype>INTEGER</datatype>
+<relation table="FILTERS" row="ID" />
+</row>
+<row name="SORT" null="0" autoincrement="0">
+<datatype>INTEGER</datatype>
+</row>
+<key type="PRIMARY" name="">
+<part>ID</part>
+</key>
+</table>
+<table x="904" y="862" name="FILTER_OPTIONS_PRODUCTS">
+<row name="ID" null="0" autoincrement="1">
+<datatype>INTEGER</datatype>
+</row>
+<row name="FILTER_OPTION_ID" null="0" autoincrement="0">
+<datatype>INTEGER</datatype>
+<relation table="FILTER_OPTIONS" row="ID" />
+</row>
+<row name="PRODUCT_ID" null="0" autoincrement="0">
+<datatype>INTEGER</datatype>
+<relation table="PRODUCTS" row="ID" />
+</row>
+<key type="PRIMARY" name="">
+<part>ID</part>
+</key>
+</table>
+<table x="651" y="302" name="GROUPS">
+<row name="ID" null="0" autoincrement="1">
+<datatype>INTEGER</datatype>
+</row>
+<row name="COMPANY_ID" null="0" autoincrement="0">
+<datatype>INTEGER</datatype>
+<relation table="COMPANIES" row="ID" />
+</row>
+<key type="PRIMARY" name="">
+<part>ID</part>
+</key>
+</table>
+<table x="899" y="157" name="GROUPS_USERS">
+<row name="ID" null="0" autoincrement="1">
+<datatype>INTEGER</datatype>
+</row>
+<row name="GROUP_ID" null="0" autoincrement="0">
+<datatype>INTEGER</datatype>
+<relation table="GROUPS" row="ID" />
+</row>
+<row name="USER_ID" null="0" autoincrement="0">
+<datatype>INTEGER</datatype>
+<relation table="USERS" row="ID" />
+</row>
+<key type="PRIMARY" name="">
+<part>ID</part>
+</key>
+</table>
+<table x="180" y="453" name="COUNTRY">
+<row name="ID" null="0" autoincrement="0">
+<datatype>INTEGER</datatype>
+</row>
+<row name="NAME" null="0" autoincrement="0">
+<datatype>VARCHAR(45)</datatype>
+</row>
+<key type="PRIMARY" name="">
+<part>ID</part>
+</key>
+</table>
+<table x="146" y="675" name="STATE">
+<row name="ID" null="0" autoincrement="0">
+<datatype>INTEGER</datatype>
+</row>
+<row name="COUNTRY_ID" null="0" autoincrement="0">
+<datatype>INTEGER</datatype>
+<relation table="COUNTRY" row="ID" />
+</row>
+<row name="NAME" null="0" autoincrement="0">
+<datatype>VARCHAR(45)</datatype>
+</row>
+<key type="PRIMARY" name="">
+<part>ID</part>
+</key>
+</table>
+<table x="132" y="542" name="CITY">
+<row name="ID" null="0" autoincrement="0">
+<datatype>INTEGER</datatype>
+</row>
+<row name="COUNTRY_ID" null="0" autoincrement="0">
+<datatype>INTEGER</datatype>
+<relation table="COUNTRY" row="ID" />
+</row>
+<row name="STATE_ID" null="0" autoincrement="0">
+<datatype>INTEGER</datatype>
+<relation table="STATE" row="ID" />
+</row>
+<row name="NAME" null="0" autoincrement="0">
+<datatype>VARCHAR(45)</datatype>
+</row>
+<key type="PRIMARY" name="">
+<part>ID</part>
+</key>
+</table>
+<table x="653" y="216" name="RIGHTS">
+<row name="ID" null="0" autoincrement="1">
+<datatype>INTEGER</datatype>
+</row>
+<row name="COMPANY_ID" null="0" autoincrement="0">
+<datatype>INTEGER</datatype>
+<relation table="COMPANIES" row="ID" />
+</row>
+<key type="PRIMARY" name="">
+<part>ID</part>
+</key>
+</table>
+<table x="901" y="25" name="RIGHT_ASSIGNMENTS">
+<row name="ID" null="0" autoincrement="1">
+<datatype>INTEGER</datatype>
+</row>
+<row name="RIGHT_ID" null="0" autoincrement="0">
+<datatype>INTEGER</datatype>
+<relation table="RIGHTS" row="ID" />
+</row>
+<row name="SUBJECT_ID" null="0" autoincrement="0">
+<datatype>INTEGER</datatype>
+<relation table="GROUPS" row="ID" />
+<relation table="ROLES" row="ID" />
+<relation table="USERS" row="ID" />
+</row>
+<row name="SUBJECT_TYPE" null="0" autoincrement="0">
+<datatype>INTEGER</datatype>
+</row>
+<key type="PRIMARY" name="">
+<part>ID</part>
+</key>
+</table>
+<table x="903" y="519" name="CATALOG_CATEGORIES">
+<row name="ID" null="0" autoincrement="1">
+<datatype>INTEGER</datatype>
+</row>
+<row name="CATALOG_ID" null="0" autoincrement="0">
+<datatype>INTEGER</datatype>
+<relation table="CATALOGS" row="ID" />
+</row>
+<row name="CATEGORY_ID" null="0" autoincrement="0">
+<datatype>INTEGER</datatype>
+<relation table="CATEGORIES" row="ID" />
+</row>
+<key type="PRIMARY" name="">
+<part>ID</part>
+</key>
+</table>
+<table x="613" y="917" name="IMAGES">
+<row name="ID" null="0" autoincrement="1">
+<datatype>INTEGER</datatype>
+</row>
+<row name="COMPANY_ID" null="0" autoincrement="0">
+<datatype>INTEGER</datatype>
+<relation table="COMPANIES" row="ID" />
+</row>
+<row name="SRC" null="0" autoincrement="0">
+<datatype>VARCHAR(255)</datatype>
+</row>
+<key type="PRIMARY" name="">
+<part>ID</part>
+</key>
+</table>
+<table x="905" y="978" name="PRODUCT_IMAGES">
+<row name="ID" null="0" autoincrement="1">
+<datatype>INTEGER</datatype>
+</row>
+<row name="PRODUCT_ID" null="0" autoincrement="0">
+<datatype>INTEGER</datatype>
+<relation table="PRODUCTS" row="ID" />
+</row>
+<row name="IMAGE_ID" null="0" autoincrement="0">
+<datatype>INTEGER</datatype>
+<relation table="IMAGES" row="ID" />
+</row>
+<key type="PRIMARY" name="">
+<part>ID</part>
+</key>
+</table>
+</sql>
